@@ -146,4 +146,3 @@ Pour toute question, suggestion ou bug, contactez l’auteur du projet ou ouvrez
 **Bon jeu et amuse-toi bien avec Rush Hour ! 🚗🧩**
 
 ---
-Réponse de Perplexity: pplx.ai/share
