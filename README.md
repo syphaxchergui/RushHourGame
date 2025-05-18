@@ -1,20 +1,27 @@
-Bien sûr ! Voici un exemple de **README.md** professionnel pour ton projet Rush Hour en C++ avec SFML, gestion des couleurs RVB et affichage par sprites.
-
----
 
 # 🚗 Rush Hour – Jeu de réflexion en C++/SFML
 
-Ce projet est une version moderne du célèbre jeu de logique **Rush Hour**, développée en C++ avec la bibliothèque graphique **SFML**. Il propose une interface graphique colorée, la gestion de plateaux personnalisés au format JSON, et l’affichage des véhicules sous forme de sprites colorés.
+Ce projet est une version moderne du célèbre jeu de logique **Rush Hour**, développée en **C++ avec SFML**. Il propose une interface graphique immersive, une gestion dynamique des niveaux au format JSON, et un rendu coloré avec **sprites personnalisés**.
 
 ---
 
 ## 📦 Fonctionnalités
 
-- **Jeu manuel** : déplacez les véhicules pour libérer la voiture rouge (X) et la faire sortir de la grille.
-- **Résolution automatique (IA)** : l’algorithme trouve la solution optimale si elle existe.
-- **Affichage graphique** : chaque véhicule est représenté par un sprite coloré selon sa couleur RVB définie dans le plateau JSON.
-- **Plateaux personnalisables** : créez vos propres niveaux facilement en éditant des fichiers JSON.
-- **Interface claire et intuitive** (clavier + souris).
+- 🧠 **Mode manuel** : déplacez les véhicules pour libérer la voiture rouge (`X`) et la faire sortir.
+- 🤖 **Résolution automatique (IA)** : l'algorithme résout le niveau s’il existe une solution.
+- 🎨 **Affichage graphique** : chaque véhicule est dessiné selon sa **couleur RVB**.
+- 🧩 **Plateaux personnalisables** : éditez ou créez vos niveaux en JSON.
+- 🕹️ **Contrôles claviers + souris** clairs et intuitifs.
+
+---
+
+## 🔗 Dépôt GitHub
+
+> 📥 Clonez le projet :  
+```bash
+git clone https://github.com/nirminee/RushHourGame.git
+cd RushHourGame
+```
 
 ---
 
@@ -22,23 +29,18 @@ Ce projet est une version moderne du célèbre jeu de logique **Rush Hour**, dé
 
 - [SFML 2.5+](https://www.sfml-dev.org/)
 - [nlohmann/json](https://github.com/nlohmann/json) (inclus dans `include/json.hpp`)
-- CMake (recommandé) ou Makefile
+- CMake (recommandé)
 
 ---
 
 ## 🚀 Installation & Compilation
 
-1. **Clonez le dépôt**  
-   ```bash
-   git clone 
-   cd RUSH
-   ```
+1. **Préparation**  
+   Placez vos assets :
+   - `assets/car.png` → sprite des véhicules
+   - `assets/OpenSans-Regular.ttf` → police
 
-2. **Placez vos assets**  
-   - Placez une image de voiture nommée `car.png` dans le dossier `assets/`
-   - Placez la police `OpenSans-Regular.ttf` dans `assets/`
-
-3. **Compilation**  
+2. **Compilation**  
    ```bash
    mkdir build
    cd build
@@ -46,31 +48,26 @@ Ce projet est une version moderne du célèbre jeu de logique **Rush Hour**, dé
    make
    ```
 
-4. **Lancement**  
+3. **Exécution**
    ```bash
    ./RushHour
    ```
 
 ---
 
-## 🎮 Utilisation
+## 🎮 Commandes
 
-- **Menu principal** :  
-  `1` = Jouer manuellement  
-  `2` = Résolution automatique (IA)
+- **Menu principal**
+  - `1` → Jouer manuellement
+  - `2` → Lancer la résolution automatique (IA)
 
-- **Contrôles en mode manuel** :
-  - Sélectionner un véhicule : appuyez sur sa lettre (`A`, `B`, ..., `X`)
-  - Déplacer : flèches directionnelles
-  - Objectif : amener la voiture rouge (X) à la sortie (bord droit de la grille)
-
-- **Plateaux** :  
-  Les fichiers JSON des plateaux sont dans le dossier `plateaux/`.  
-  Vous pouvez les éditer ou en créer de nouveaux.
+- **Contrôles en jeu**
+  - Sélection : taper la lettre d’un véhicule (`A` à `X`)
+  - Déplacement : touches fléchées
 
 ---
 
-## 📝 Format d’un plateau JSON
+## 📝 Format JSON d’un plateau
 
 ```json
 {
@@ -85,8 +82,7 @@ Ce projet est une version moderne du célèbre jeu de logique **Rush Hour**, dé
       "y": 1,
       "taille": 3,
       "orientation": "verticale"
-    },
-    // ... autres véhicules
+    }
   ],
   "voiture_dep": {
     "id": "X",
@@ -105,44 +101,53 @@ Ce projet est une version moderne du célèbre jeu de logique **Rush Hour**, dé
 
 ---
 
-## 🎨 Guide des couleurs
+## 🎨 Représentation des couleurs utilisées
 
-| Lettre | Couleur RVB         | Signification         |
-|--------|---------------------|----------------------|
-| X      | rvb(255, 0, 0)      | Voiture rouge (à sortir) |
-| A      | rvb(0, 255, 0)      | Vert                 |
-| B      | rvb(0, 0, 255)      | Bleu                 |
-| C      | rvb(255, 128, 0)    | Orange               |
-| ...    | ...                 | ...                  |
+| Lettre | Couleur RVB            | Exemple visuel              | Signification                         |
+|--------|------------------------|------------------------------|----------------------------------------|
+| X      | `rvb(255, 0, 0)`       | ![#FF0000](https://via.placeholder.com/15/FF0000/000000?text=+) Rouge        | Voiture à libérer                      |
+| A      | `rvb(0, 255, 0)`       | ![#00FF00](https://via.placeholder.com/15/00FF00/000000?text=+) Vert         | Voiture classique                      |
+| B      | `rvb(0, 0, 255)`       | ![#0000FF](https://via.placeholder.com/15/0000FF/000000?text=+) Bleu         | Voiture classique                      |
+| C      | `rvb(255, 128, 0)`     | ![#FF8000](https://via.placeholder.com/15/FF8000/000000?text=+) Orange       | Camion / véhicule                      |
+| D      | `rvb(255, 105, 180)`   | ![#FF69B4](https://via.placeholder.com/15/FF69B4/000000?text=+) Rose vif     | Camion ou autre                        |
+| E      | `rvb(157, 113, 83)`    | ![#9D7153](https://via.placeholder.com/15/9D7153/000000?text=+) Marron clair  | Voiture                                |
+| F      | `rvb(238, 130, 238)`   | ![#EE82EE](https://via.placeholder.com/15/EE82EE/000000?text=+) Violet clair  | Voiture                                |
+| G      | `rvb(43, 255, 255)`    | ![#2BFFFF](https://via.placeholder.com/15/2BFFFF/000000?text=+) Cyan clair    | Voiture                                |
+| H      | `rvb(255, 0, 255)`     | ![#FF00FF](https://via.placeholder.com/15/FF00FF/000000?text=+) Magenta       | Voiture                                |
 
----
-
-## 💡 Astuces
-
-- Pour ajouter un nouveau plateau, copiez un fichier JSON existant et modifiez les positions, tailles, couleurs, etc.
-- Pour changer l’apparence des voitures, remplacez `car.png` par une autre image (format PNG recommandé).
-- Pour tester un plateau en IA, choisissez l’option 2 au lancement.
+> ℹ️ Les couleurs sont définies dans les fichiers JSON et utilisées pour afficher les sprites.
 
 ---
 
-## 🛠️ Développement
+## 🛠️ Organisation du projet
 
-- **Structure du projet** :
-  - `src/` : sources C++
-  - `include/` : headers et json.hpp
-  - `assets/` : images et polices
-  - `plateaux/` : niveaux JSON
-  - `.vscode/` : config VS Code (optionnel)
-  - `build/` : dossier de compilation
+```
+RushHourGame/
+├── assets/       # Images & polices
+├── include/      # Fichiers .hpp (dont json.hpp)
+├── plateaux/     # Fichiers de niveaux JSON
+├── src/          # Fichiers sources C++
+├── build/        # Dossier de compilation (vide au début)
+├── CMakeLists.txt
+└── README.md
+```
+
+---
+
+## 💡 Conseils
+
+- Pour ajouter un niveau, copiez un fichier JSON et changez les véhicules.
+- Pour tester un niveau avec l’IA, utilisez l’option `2` du menu.
+- Vous pouvez facilement adapter les couleurs et tailles des véhicules dans les fichiers JSON.
 
 ---
 
 ## 📧 Contact
 
-Pour toute question, suggestion ou bug, contactez l’auteur du projet ou ouvrez une issue sur le dépôt Git.
+Une question ou un bug ?  
+👉 Ouvrez une [issue sur GitHub](https://github.com/nirminee/RushHourGame/issues) ou contactez le développeur.
 
 ---
 
-**Bon jeu et amuse-toi bien avec Rush Hour ! 🚗🧩**
-
----
+**🧩 Amuse-toi bien avec Rush Hour !**  
+**🚗 Bonne chance pour libérer la voiture rouge !**
