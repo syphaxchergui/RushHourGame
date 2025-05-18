@@ -1,0 +1,10 @@
+{
+    "nom": "test IA",
+    "largeur": 6,
+    "hauteur": 6,
+    "voitures": [
+        {"id":"A", "couleur":"rvb(0,255,0)", "x":3, "y":2, "taille":2, "orientation":"verticale"}
+    ],
+    "voiture_dep": {"id":"X", "couleur":"rvb(255,0,0)", "x":1, "y":3, "taille":2, "orientation":"horizontale"},
+    "sortie": {"x":7, "y":3}
+}
