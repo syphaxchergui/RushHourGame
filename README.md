@@ -105,15 +105,15 @@ cd RushHourGame
 
 | Lettre | Couleur RVB            | Exemple visuel              | Signification                         |
 |--------|------------------------|------------------------------|----------------------------------------|
-| X      | `rvb(255, 0, 0)`       | ![#FF0000](https://via.placeholder.com/15/FF0000/000000?text=+) Rouge        | Voiture à libérer                      |
-| A      | `rvb(0, 255, 0)`       | ![#00FF00](https://via.placeholder.com/15/00FF00/000000?text=+) Vert         | Voiture classique                      |
-| B      | `rvb(0, 0, 255)`       | ![#0000FF](https://via.placeholder.com/15/0000FF/000000?text=+) Bleu         | Voiture classique                      |
-| C      | `rvb(255, 128, 0)`     | ![#FF8000](https://via.placeholder.com/15/FF8000/000000?text=+) Orange       | Camion / véhicule                      |
-| D      | `rvb(255, 105, 180)`   | ![#FF69B4](https://via.placeholder.com/15/FF69B4/000000?text=+) Rose vif     | Camion ou autre                        |
-| E      | `rvb(157, 113, 83)`    | ![#9D7153](https://via.placeholder.com/15/9D7153/000000?text=+) Marron clair  | Voiture                                |
-| F      | `rvb(238, 130, 238)`   | ![#EE82EE](https://via.placeholder.com/15/EE82EE/000000?text=+) Violet clair  | Voiture                                |
-| G      | `rvb(43, 255, 255)`    | ![#2BFFFF](https://via.placeholder.com/15/2BFFFF/000000?text=+) Cyan clair    | Voiture                                |
-| H      | `rvb(255, 0, 255)`     | ![#FF00FF](https://via.placeholder.com/15/FF00FF/000000?text=+) Magenta       | Voiture                                |
+| X      | `rvb(255, 0, 0)`       | Rouge        | Voiture à libérer                      |
+| A      | `rvb(0, 255, 0)`       | Vert         | Voiture classique                      |
+| B      | `rvb(0, 0, 255)`       | Bleu         | Voiture classique                      |
+| C      | `rvb(255, 128, 0)`     | Orange       | Camion / véhicule                      |
+| D      | `rvb(255, 105, 180)`   | Rose vif     | Camion ou autre                        |
+| E      | `rvb(157, 113, 83)`    | Marron clair  | Voiture                                |
+| F      | `rvb(238, 130, 238)`   | Violet clair  | Voiture                                |
+| G      | `rvb(43, 255, 255)`    | Cyan clair    | Voiture                                |
+| H      | `rvb(255, 0, 255)`     | Magenta       | Voiture                                |
 
 > ℹ️ Les couleurs sont définies dans les fichiers JSON et utilisées pour afficher les sprites.
 
