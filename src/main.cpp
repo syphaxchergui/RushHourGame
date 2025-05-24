@@ -3,6 +3,7 @@
 #include "Solver.hpp"
 #include <iostream>
 #include <sstream>
+#include <filesystem> 
 
 const int cellSize = 100;
 char vehiculeActif = 'X';
@@ -216,8 +217,33 @@ int main() {
     int choix;
     std::cin >> choix;
 
+    // List plateau files
+    std::vector<std::string> plateaux;
+    std::string plateauxDir = "../plateaux";
+    std::cout << "\nPlateaux disponibles :\n";
+    int idx = 1;
+    for (const auto& entry : std::filesystem::directory_iterator(plateauxDir)) {
+        if (entry.path().extension() == ".json") {
+            plateaux.push_back(entry.path().filename().string());
+            std::cout << idx++ << ". " << plateaux.back() << '\n';
+        }
+    }
+    if (plateaux.empty()) {
+        std::cerr << "Aucun plateau trouvé dans " << plateauxDir << std::endl;
+        return 1;
+    }
+
+    std::cout << "Choisissez le numéro du plateau : ";
+    int plateauChoix = 0;
+    std::cin >> plateauChoix;
+    while (plateauChoix < 1 || plateauChoix > (int)plateaux.size()) {
+        std::cout << "Numéro invalide. Choisissez à nouveau : ";
+        std::cin >> plateauChoix;
+    }
+    std::string plateauPath = plateauxDir + "/" + plateaux[plateauChoix - 1];
+
     Grille g;
-    if (!g.chargerPlateauDepuisJson("../plateaux/plateau2.json")) {
+    if (!g.chargerPlateauDepuisJson(plateauPath)) {
         std::cerr << "Erreur lors du chargement.\n";
         return 1;
     }
