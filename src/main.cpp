@@ -63,21 +63,24 @@ void launchManualMode(Grille& g, sf::Texture& carTexture) {
             sf::Sprite carSprite;
             carSprite.setTexture(carTexture);
 
-            float scaleX = (v.isHorizontal() ? v.getLongueur() : 1);
-            float scaleY = (!v.isHorizontal() ? v.getLongueur() : 1);
-            carSprite.setScale(
-                (cellSize * scaleX) / carTexture.getSize().x,
-                (cellSize * scaleY) / carTexture.getSize().y
-            );
-
-            carSprite.setPosition(v.getX() * cellSize, v.getY() * cellSize);
-            carSprite.setColor(getColorForId(v.getId(), colorMap));
-
-            if (!v.isHorizontal()) {
+            float scaleX, scaleY;
+            if (v.isHorizontal()) {
+                scaleX = v.getLongueur() * (float)cellSize / carTexture.getSize().x;
+                scaleY = (float)cellSize / carTexture.getSize().y;
+                carSprite.setScale(scaleX, scaleY);
+                carSprite.setPosition(v.getX() * cellSize, v.getY() * cellSize);
+            } else {
+                // For vertical: stretch horizontally, then rotate
+                scaleX = v.getLongueur() * (float)cellSize / carTexture.getSize().x;
+                scaleY = (float)cellSize / carTexture.getSize().y;
+                carSprite.setScale(scaleX, scaleY);
                 carSprite.setRotation(90.f);
-                carSprite.setOrigin(0, carTexture.getSize().y);
+                carSprite.setOrigin(0, 0);
+                // After rotation, position is (y, gridSize - x - 1)
+                carSprite.setPosition((v.getX() + 1) * cellSize, v.getY() * cellSize);
             }
 
+            carSprite.setColor(getColorForId(v.getId(), colorMap));
             window.draw(carSprite);
         }
 
@@ -146,21 +149,24 @@ void animateSolution(Grille& g, const std::vector<std::string>& solution, sf::Te
             sf::Sprite carSprite;
             carSprite.setTexture(carTexture);
 
-            float scaleX = (v.isHorizontal() ? v.getLongueur() : 1);
-            float scaleY = (!v.isHorizontal() ? v.getLongueur() : 1);
-            carSprite.setScale(
-                (cellSize * scaleX) / carTexture.getSize().x,
-                (cellSize * scaleY) / carTexture.getSize().y
-            );
-
-            carSprite.setPosition(v.getX() * cellSize, v.getY() * cellSize);
-            carSprite.setColor(getColorForId(v.getId(), colorMap));
-
-            if (!v.isHorizontal()) {
+            float scaleX, scaleY;
+            if (v.isHorizontal()) {
+                scaleX = v.getLongueur() * (float)cellSize / carTexture.getSize().x;
+                scaleY = (float)cellSize / carTexture.getSize().y;
+                carSprite.setScale(scaleX, scaleY);
+                carSprite.setPosition(v.getX() * cellSize, v.getY() * cellSize);
+            } else {
+                // For vertical: stretch horizontally, then rotate
+                scaleX = v.getLongueur() * (float)cellSize / carTexture.getSize().x;
+                scaleY = (float)cellSize / carTexture.getSize().y;
+                carSprite.setScale(scaleX, scaleY);
                 carSprite.setRotation(90.f);
-                carSprite.setOrigin(0, carTexture.getSize().y);
+                carSprite.setOrigin(0, 0);
+                // After rotation, position is (y, gridSize - x - 1)
+                carSprite.setPosition((v.getX() + 1) * cellSize, v.getY() * cellSize);
             }
 
+            carSprite.setColor(getColorForId(v.getId(), colorMap));
             window.draw(carSprite);
         }
 
