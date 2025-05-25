@@ -5,7 +5,7 @@
 
 using json = nlohmann::json;
 
-Grille::Grille() : grille(6, std::vector<char>(6, '.')) {}
+Grille::Grille() : largeur(6), hauteur(6), cases(6, std::vector<char>(6, '.')) {}
 
 bool Grille::chargerPlateauDepuisJson(const std::string& chemin) {
     std::ifstream fichier(chemin);
@@ -16,7 +16,10 @@ bool Grille::chargerPlateauDepuisJson(const std::string& chemin) {
 
     vehicules.clear();
     colorMap.clear();
+    largeur = donnees["largeur"].get<int>();
+    hauteur = donnees["hauteur"].get<int>();
 
+    cases.assign(hauteur, std::vector<char>(largeur, '.'));
     // Voiture départ (X)
     auto& vd = donnees["voiture_dep"];
     vehicules.emplace_back(
@@ -54,13 +57,18 @@ bool Grille::chargerPlateauDepuisJson(const std::string& chemin) {
     return true;
 }
 
+char Grille::getCase(int x, int y) const {
+    if (x < 0 || x >= largeur || y < 0 || y >= hauteur) return '.';
+    return grille[y][x];
+}
+
 void Grille::mettreAJourGrille() {
-    grille.assign(6, std::vector<char>(6, '.'));
+    grille.assign(hauteur, std::vector<char>(largeur, '.'));
     for (const auto& v : vehicules) {
         for (int i = 0; i < v.getLongueur(); ++i) {
             int xi = v.isHorizontal() ? v.getX() + i : v.getX();
             int yi = v.isHorizontal() ? v.getY() : v.getY() + i;
-            if (xi < 6 && yi < 6) {
+            if (xi >= 0 && xi < largeur && yi >= 0 && yi < hauteur) {
                 grille[yi][xi] = v.getId();
             }
         }
@@ -82,7 +90,7 @@ bool Grille::deplacerVehicule(char id, const std::string& direction) {
             int nx = v.getX() + (v.isHorizontal() ? i : 0) + dx;
             int ny = v.getY() + (v.isHorizontal() ? 0 : i) + dy;
 
-            if (nx < 0 || nx >= 6 || ny < 0 || ny >= 6) return false;
+            if (nx < 0 || nx >= largeur || ny < 0 || ny >= hauteur) return false;
             if (grille[ny][nx] != '.' && grille[ny][nx] != v.getId()) return false;
         }
 
@@ -108,7 +116,7 @@ bool Grille::gagne() const {
             int finY = v.getY();
 
             // La sortie est toujours sur le bord droit (x=5 en 0-based)
-            return (finX == 5) && (finY == sortieY);
+            return (finX == sortieX) && (finY == sortieY);
         }
     }
     return false;

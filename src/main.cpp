@@ -15,7 +15,7 @@ sf::Color getColorForId(char id, const std::map<char, sf::Color>& colorMap) {
 }
 
 void launchManualMode(Grille& g, sf::Texture& carTexture) {
-    sf::RenderWindow window(sf::VideoMode(600, 600), "Rush Hour - Manuel");
+    sf::RenderWindow window(sf::VideoMode(g.getLargeur() * cellSize, g.getHauteur() * cellSize), "Rush Hour - Manuel");
     window.setFramerateLimit(60);
 
     sf::Font font;
@@ -47,13 +47,20 @@ void launchManualMode(Grille& g, sf::Texture& carTexture) {
         window.clear(sf::Color::White);
 
         // Dessiner la grille
-        for (int y = 0; y < 6; ++y) {
-            for (int x = 0; x < 6; ++x) {
+        for (int y = 0; y < g.getHauteur(); ++y) {
+            for (int x = 0; x < g.getLargeur(); ++x) {
                 sf::RectangleShape cell(sf::Vector2f(cellSize - 2, cellSize - 2));
                 cell.setPosition(x * cellSize, y * cellSize);
-                cell.setFillColor(sf::Color(230, 230, 230));
-                cell.setOutlineThickness(1);
-                cell.setOutlineColor(sf::Color::Black);
+                // Check if this cell is the sortie
+                if (x == g.getSortieX() && y == g.getSortieY()) {
+                    cell.setFillColor(sf::Color(230, 230, 230)); // Keep the default fill color
+                    cell.setOutlineThickness(3);                // Make the border thicker
+                    cell.setOutlineColor(sf::Color::Red);       // Set the border color to red
+                } else {
+                    cell.setFillColor(sf::Color(230, 230, 230));
+                    cell.setOutlineThickness(1);
+                    cell.setOutlineColor(sf::Color::Black);
+                }
                 window.draw(cell);
             }
         }
@@ -103,7 +110,7 @@ void launchManualMode(Grille& g, sf::Texture& carTexture) {
 }
 
 void animateSolution(Grille& g, const std::vector<std::string>& solution, sf::Texture& carTexture) {
-    sf::RenderWindow window(sf::VideoMode(600, 600), "Rush Hour - Solution IA");
+    sf::RenderWindow window(sf::VideoMode(g.getLargeur() * cellSize, g.getHauteur() * cellSize), "Rush Hour - Solution IA");
     window.setFramerateLimit(2);
 
     sf::Font font;
@@ -133,13 +140,20 @@ void animateSolution(Grille& g, const std::vector<std::string>& solution, sf::Te
         window.clear(sf::Color::White);
 
         // Dessiner la grille
-        for (int y = 0; y < 6; ++y) {
-            for (int x = 0; x < 6; ++x) {
+        for (int y = 0; y < copieGrille.getHauteur(); ++y) {
+            for (int x = 0; x < copieGrille.getLargeur(); ++x) {
                 sf::RectangleShape cell(sf::Vector2f(cellSize - 2, cellSize - 2));
                 cell.setPosition(x * cellSize, y * cellSize);
-                cell.setFillColor(sf::Color(230, 230, 230));
-                cell.setOutlineThickness(1);
-                cell.setOutlineColor(sf::Color::Black);
+                // Check if this cell is the sortie
+                if (x == g.getSortieX() && y == g.getSortieY()) {
+                    cell.setFillColor(sf::Color(230, 230, 230)); // Keep the default fill color
+                    cell.setOutlineThickness(3);                // Make the border thicker
+                    cell.setOutlineColor(sf::Color::Red);       // Set the border color to red
+                } else {
+                    cell.setFillColor(sf::Color(230, 230, 230));
+                    cell.setOutlineThickness(1);
+                    cell.setOutlineColor(sf::Color::Black);
+                }
                 window.draw(cell);
             }
         }
@@ -254,6 +268,9 @@ int main() {
         std::cerr << "Erreur lors du chargement du sprite voiture !" << std::endl;
         return 1;
     }
+
+    std::cout << "Plateau chargé : " << plateauPath << std::endl;
+    std::cout << "Dimensions du plateau : " << g.getLargeur() << "x" << g.getHauteur() << std::endl;
 
     if (choix == 1) {
         launchManualMode(g, carTexture);
